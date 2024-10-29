@@ -2,9 +2,10 @@
   "name": "hashmap",
   "version": "1.0.0",
   "description": "My own take on hash maps",
-  "main": "index.js",
+  "main": "index.mjs",
   "type": "module",
   "scripts": {
+    "start": "node index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
