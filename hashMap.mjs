@@ -33,21 +33,9 @@ class HashMap {
     this.buckets = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
   }
 
-  //this is the hash function that creates an integer based on the input
-  hash(key) {
-    let hashCode = 0;
-        
-    const primeNumber = 31;
-    for (let i = 0; i < key.length; i++) {
-      hashCode = primeNumber * hashCode + key.charCodeAt(i);
-    }
-  
-    return hashCode;
-  }
-
   // this function will return the bucket that the key belongs to
   bucket(key) {
-    let h = this.hash(key);
+    let h = this.murmur3(key);
     return this.buckets[h % this.buckets.length];
   }
 
