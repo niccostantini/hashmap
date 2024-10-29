@@ -1,4 +1,4 @@
-import { murmurhash3_32_gc as murmur3 } from "./murmurhash3";
+import { murmurhash3_32_gc as murmur3 } from "./murmurhash3.mjs";
 
 class Node {
     constructor(value) {
