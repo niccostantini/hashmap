@@ -11,7 +11,7 @@
  * @return {number} 32-bit positive integer hash 
  */
 
-function murmurhash3_32_gc(key, seed) {
+function murmurhash3_32_gc(key, seed = 1) {
 	var remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i;
 	
 	remainder = key.length & 3; // key.length % 4
@@ -62,3 +62,5 @@ function murmurhash3_32_gc(key, seed) {
 
 	return h1 >>> 0;
 }
+
+export {murmurhash3_32_gc}
