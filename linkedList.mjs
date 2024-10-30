@@ -180,6 +180,11 @@ class LinkedList {
         
     }
 
+    clear() { // Clear the list
+        this.head = null;
+        this.tail = null;
+    }
+
 }
 
 export {LinkedList, Node};
