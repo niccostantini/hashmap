@@ -3,7 +3,7 @@ import hash from "./murmur3.mjs";
 
 class HashMap {
     constructor () { //create empty array of 13 linked lists
-        this.buckets = Array.from({ length: 13 }, () => new LinkedList())
+        this.buckets = Array.from({ length: 16 }, () => new LinkedList())
         this.__size = 0;
     }
 
@@ -60,6 +60,7 @@ class HashMap {
         // If key does not exist, append a new { key, value } object
         bucket.append({ key, value });
         this.__size++
+        this.expand()
     }
 
     get(key) {
@@ -125,6 +126,74 @@ class HashMap {
         }
     
         return false; // Key not found
+    }
+
+    length() {
+        let count = 0;
+        for (const bucket of this.buckets) {
+            let currentNode = bucket.getHead();
+            while (currentNode) {
+                if (currentNode.value.key) {
+                    // If key exists, increment count
+                    count++;
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        return count;
+    }
+
+
+    clear() {
+        for (const bucket of this.buckets) {
+            bucket.clear();
+        }
+        this.__size = 0;
+    }
+
+    keys() {
+        let array = [];
+        for (const bucket of this.buckets) {
+            let currentNode = bucket.getHead(); //start from the first node
+            while (currentNode) { //traverse the list
+                if (currentNode.value.key !== undefined && currentNode.value.key !== null) { //if key is not null or undefined
+                    // If key exists, push key
+                    array.push(currentNode.value.key);
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        return array;
+    }
+
+    values() {
+        let array = [];
+        for (const bucket of this.buckets) {
+            let currentNode = bucket.getHead(); //start from the first node
+            while (currentNode) { //traverse the list
+                if (currentNode.value.key !== undefined && currentNode.value.key !== null) { //if key is not null or undefined
+                    // If key exists, push key
+                    array.push(currentNode.value.value);
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        return array;
+    }
+
+    entries() {
+        let entries = [];
+        for (const bucket of this.buckets) {
+            let currentNode = bucket.getHead(); //start from the first node
+            while (currentNode) { //traverse the list
+                if (currentNode.value.key !== undefined && currentNode.value.key !== null) { //if key is not null or undefined
+                    // If key exists, push key/value pair
+                    entries.push([currentNode.value.key, currentNode.value.value]);
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        return entries;
     }
 }
 
